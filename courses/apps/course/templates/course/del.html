@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3> Are you sure you wna to delete the following course?</h3>
+      {% for delete in deletes %}
+      <p>name : {{delete.course_name}}</p>
+      <p>Description : {{delete.description}}<p>
+    <table>
+      <tbody>
+        <tr>
+          <td>  <form action={% url "home:remove" delete.id%} method="post">
+              {% csrf_token %}
+              <input type="submit" name="" value="Yes!">
+            </form></td>{% endfor %}
+          <td>  <form class="" action="/back" method="post">
+              {% csrf_token %}
+              <input type="submit" name="" value="No!"></td>
+        </tr>
+      </tbody>
+    </table>
+    </form>
+  </body>
+</html>
