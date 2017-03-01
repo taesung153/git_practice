@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Update Appointment</title>
+    {% load tz %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'Appointment/css/style.css'%}" media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+    <form class="home" action="{% url 'Appointment:dashboard' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" name="button">Dashboard</button>
+    </form>
+    <form class="home" action="{% url 'LoginReg:index' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" name="button">logout</button>
+    </form>
+
+        <legend>Update Appointment</legend>
+        <form class="newform" action="{% url 'Appointment:update_appt' appt_id=appt.id %}" method="post">
+          {% csrf_token %}
+          <label for="appt_task">Tasks: </label>
+          <input type="text" name="appt_task" value="{{appt.task}}">
+          <label for="appt_status">Status: </label>
+          <select class="dropdown" name="appt_status">
+            <option value="{{appt.status}}" selected>{{appt.status}}</option>
+            <option value="Pending">Pending</option>
+            <option value="Done">Done</option>
+            <option value="Missed">Missed</option>
+          </select>
+          <label for="appt_date">Date: is {{appt.date}}</label>
+          <input type="date" name="appt_date" value="{{appt.date}}">
+          <label for="appt_time">Time: is {{appt.time}}</label>
+          <input type="time" name="appt_time" value="{{appt.time}}">
+          <button type="submit" name="button">Update</button>
+        </form>
+
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>
